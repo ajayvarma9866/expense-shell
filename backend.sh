@@ -34,12 +34,15 @@ else
   echo -e "${colour} FAILURE \e[0m"
 fi
 
-echo -e "${colour} add application user \e[0m"
-useradd expense &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "${colour} SUCCESS \e[0m"
-else
-  echo -e "${colour} FAILURE \e[0m"
+id expense &>>$log_file
+if [ $? -ne 0 ]; then
+  echo -e "${colour} add application user \e[0m"
+  useradd expense &>>$log_file
+  if [ $? -eq 0 ]; then
+    echo -e "${colour} SUCCESS \e[0m"
+  else
+    echo -e "${colour} FAILURE \e[0m"
+  fi
 fi
 
 echo -e "${colour} create application directory \e[0m"
