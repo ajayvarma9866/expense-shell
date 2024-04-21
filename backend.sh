@@ -72,7 +72,7 @@ VALIDATE $? "starting backend service"
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installation of mysql"
 
-mysql -h db.devops9866.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOGFILE
+mysql -h db.devops9866.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
 VALIDATE $? "loading schema"
 
 systemctl restart backend &>>$LOGFILE
