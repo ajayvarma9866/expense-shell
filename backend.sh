@@ -46,6 +46,7 @@ then
     VALIDATE $? "creating expense user"
 else
     echo -e "expense user already created... $Y SKIPPING $N"
+fi
 
 mkdir -p /app &>>$LOGFILE
 VALIDATE $? "craeting a directory"
