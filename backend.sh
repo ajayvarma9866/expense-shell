@@ -39,18 +39,22 @@ VALIDATE $? "Enabling nodejs:20 version"
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing nodejs"
 
-useradd expense &>>$LOGFILE
-VALIDATE $? "craeting user"
+id expense &>>$LOGFILE
+if[ $? -ne 0 ]
+then
+    useradd expense &>>$LOGFILE
+    VALIDATE $? "craeting user"
+else
+    echo -e "expense user already created... $Y SKIPPING $N"
 
-mkdir /app &>>$LOGFILE
+mkdir -p /app &>>$LOGFILE
 VALIDATE $? "craeting a directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
 VALIDATE $? "downloading backend content"
 
-cd /app &>>$LOGFILE
-VALIDATE $? "changing to app directory"
-
+cd /app
+rm -rf /app/*
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "unzipping the backend content"
 
