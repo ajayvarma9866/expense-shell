@@ -42,7 +42,7 @@ VALIDATE $? "starting MySQL server"
 
 #Below code will be useful for idempotent nature
 
-mysql -h mysql.devops9866.online -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h db.devops9866.online -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if[ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
